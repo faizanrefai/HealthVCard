@@ -1,0 +1,458 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		49EF7BB81414CEDC00FE0E5E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EF7BB71414CEDC00FE0E5E /* UIKit.framework */; };
+		49EF7BBA1414CEDC00FE0E5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EF7BB91414CEDC00FE0E5E /* Foundation.framework */; };
+		49EF7BBC1414CEDC00FE0E5E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EF7BBB1414CEDC00FE0E5E /* CoreGraphics.framework */; };
+		49EF7BC21414CEDC00FE0E5E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49EF7BC01414CEDC00FE0E5E /* InfoPlist.strings */; };
+		49EF7BC51414CEDC00FE0E5E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EF7BC41414CEDC00FE0E5E /* main.m */; };
+		49EF7BC81414CEDC00FE0E5E /* HealthVCardAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EF7BC71414CEDC00FE0E5E /* HealthVCardAppDelegate.m */; };
+		49EF7BCB1414CEDC00FE0E5E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49EF7BC91414CEDC00FE0E5E /* MainWindow.xib */; };
+		49EF7BCE1414CEDC00FE0E5E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EF7BCD1414CEDC00FE0E5E /* RootViewController.m */; };
+		49EF7BD11414CEDC00FE0E5E /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49EF7BCF1414CEDC00FE0E5E /* RootViewController.xib */; };
+		49EF7BD81414CEDC00FE0E5E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EF7BB71414CEDC00FE0E5E /* UIKit.framework */; };
+		49EF7BD91414CEDC00FE0E5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EF7BB91414CEDC00FE0E5E /* Foundation.framework */; };
+		49EF7BDA1414CEDC00FE0E5E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EF7BBB1414CEDC00FE0E5E /* CoreGraphics.framework */; };
+		49EF7BE21414CEDD00FE0E5E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49EF7BE01414CEDD00FE0E5E /* InfoPlist.strings */; };
+		49EF7BE51414CEDD00FE0E5E /* HealthVCardTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 49EF7BE41414CEDD00FE0E5E /* HealthVCardTests.h */; };
+		49EF7BE71414CEDD00FE0E5E /* HealthVCardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49EF7BE61414CEDD00FE0E5E /* HealthVCardTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		49EF7BDB1414CEDD00FE0E5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49EF7BAA1414CEDC00FE0E5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 49EF7BB21414CEDC00FE0E5E;
+			remoteInfo = HealthVCard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		49EF7BB31414CEDC00FE0E5E /* HealthVCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthVCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49EF7BB71414CEDC00FE0E5E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		49EF7BB91414CEDC00FE0E5E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		49EF7BBB1414CEDC00FE0E5E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		49EF7BBF1414CEDC00FE0E5E /* HealthVCard-Info.plist */ = {isa = PBXFileReference; path = "HealthVCard-Info.plist"; sourceTree = "<group>"; };
+		49EF7BC11414CEDC00FE0E5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		49EF7BC31414CEDC00FE0E5E /* HealthVCard-Prefix.pch */ = {isa = PBXFileReference; path = "HealthVCard-Prefix.pch"; sourceTree = "<group>"; };
+		49EF7BC41414CEDC00FE0E5E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		49EF7BC61414CEDC00FE0E5E /* HealthVCardAppDelegate.h */ = {isa = PBXFileReference; path = HealthVCardAppDelegate.h; sourceTree = "<group>"; };
+		49EF7BC71414CEDC00FE0E5E /* HealthVCardAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthVCardAppDelegate.m; sourceTree = "<group>"; };
+		49EF7BCA1414CEDC00FE0E5E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		49EF7BCC1414CEDC00FE0E5E /* RootViewController.h */ = {isa = PBXFileReference; path = RootViewController.h; sourceTree = "<group>"; };
+		49EF7BCD1414CEDC00FE0E5E /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		49EF7BD01414CEDC00FE0E5E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
+		49EF7BD71414CEDC00FE0E5E /* HealthVCardTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HealthVCardTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		49EF7BDF1414CEDD00FE0E5E /* HealthVCardTests-Info.plist */ = {isa = PBXFileReference; path = "HealthVCardTests-Info.plist"; sourceTree = "<group>"; };
+		49EF7BE11414CEDD00FE0E5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		49EF7BE31414CEDD00FE0E5E /* HealthVCardTests-Prefix.pch */ = {isa = PBXFileReference; path = "HealthVCardTests-Prefix.pch"; sourceTree = "<group>"; };
+		49EF7BE41414CEDD00FE0E5E /* HealthVCardTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HealthVCardTests.h; sourceTree = "<group>"; };
+		49EF7BE61414CEDD00FE0E5E /* HealthVCardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HealthVCardTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		49EF7BB01414CEDC00FE0E5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49EF7BB81414CEDC00FE0E5E /* UIKit.framework in Frameworks */,
+				49EF7BBA1414CEDC00FE0E5E /* Foundation.framework in Frameworks */,
+				49EF7BBC1414CEDC00FE0E5E /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49EF7BD31414CEDC00FE0E5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49EF7BD81414CEDC00FE0E5E /* UIKit.framework in Frameworks */,
+				49EF7BD91414CEDC00FE0E5E /* Foundation.framework in Frameworks */,
+				49EF7BDA1414CEDC00FE0E5E /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		49EF7BA81414CEDC00FE0E5E = {
+			isa = PBXGroup;
+			children = (
+				49EF7BBD1414CEDC00FE0E5E /* HealthVCard */,
+				49EF7BDD1414CEDD00FE0E5E /* HealthVCardTests */,
+				49EF7BB61414CEDC00FE0E5E /* Frameworks */,
+				49EF7BB41414CEDC00FE0E5E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		49EF7BB41414CEDC00FE0E5E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49EF7BB31414CEDC00FE0E5E /* HealthVCard.app */,
+				49EF7BD71414CEDC00FE0E5E /* HealthVCardTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49EF7BB61414CEDC00FE0E5E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				49EF7BB71414CEDC00FE0E5E /* UIKit.framework */,
+				49EF7BB91414CEDC00FE0E5E /* Foundation.framework */,
+				49EF7BBB1414CEDC00FE0E5E /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		49EF7BBD1414CEDC00FE0E5E /* HealthVCard */ = {
+			isa = PBXGroup;
+			children = (
+				49EF7BC61414CEDC00FE0E5E /* HealthVCardAppDelegate.h */,
+				49EF7BC71414CEDC00FE0E5E /* HealthVCardAppDelegate.m */,
+				49EF7BC91414CEDC00FE0E5E /* MainWindow.xib */,
+				49EF7BCC1414CEDC00FE0E5E /* RootViewController.h */,
+				49EF7BCD1414CEDC00FE0E5E /* RootViewController.m */,
+				49EF7BCF1414CEDC00FE0E5E /* RootViewController.xib */,
+				49EF7BBE1414CEDC00FE0E5E /* Supporting Files */,
+			);
+			path = HealthVCard;
+			sourceTree = "<group>";
+		};
+		49EF7BBE1414CEDC00FE0E5E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				49EF7BBF1414CEDC00FE0E5E /* HealthVCard-Info.plist */,
+				49EF7BC01414CEDC00FE0E5E /* InfoPlist.strings */,
+				49EF7BC31414CEDC00FE0E5E /* HealthVCard-Prefix.pch */,
+				49EF7BC41414CEDC00FE0E5E /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		49EF7BDD1414CEDD00FE0E5E /* HealthVCardTests */ = {
+			isa = PBXGroup;
+			children = (
+				49EF7BE41414CEDD00FE0E5E /* HealthVCardTests.h */,
+				49EF7BE61414CEDD00FE0E5E /* HealthVCardTests.m */,
+				49EF7BDE1414CEDD00FE0E5E /* Supporting Files */,
+			);
+			path = HealthVCardTests;
+			sourceTree = "<group>";
+		};
+		49EF7BDE1414CEDD00FE0E5E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				49EF7BDF1414CEDD00FE0E5E /* HealthVCardTests-Info.plist */,
+				49EF7BE01414CEDD00FE0E5E /* InfoPlist.strings */,
+				49EF7BE31414CEDD00FE0E5E /* HealthVCardTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		49EF7BB21414CEDC00FE0E5E /* HealthVCard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49EF7BEA1414CEDD00FE0E5E /* Build configuration list for PBXNativeTarget "HealthVCard" */;
+			buildPhases = (
+				49EF7BAF1414CEDC00FE0E5E /* Sources */,
+				49EF7BB01414CEDC00FE0E5E /* Frameworks */,
+				49EF7BB11414CEDC00FE0E5E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HealthVCard;
+			productName = HealthVCard;
+			productReference = 49EF7BB31414CEDC00FE0E5E /* HealthVCard.app */;
+			productType = "com.apple.product-type.application";
+		};
+		49EF7BD61414CEDC00FE0E5E /* HealthVCardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49EF7BED1414CEDD00FE0E5E /* Build configuration list for PBXNativeTarget "HealthVCardTests" */;
+			buildPhases = (
+				49EF7BD21414CEDC00FE0E5E /* Sources */,
+				49EF7BD31414CEDC00FE0E5E /* Frameworks */,
+				49EF7BD41414CEDC00FE0E5E /* Resources */,
+				49EF7BD51414CEDC00FE0E5E /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				49EF7BDC1414CEDD00FE0E5E /* PBXTargetDependency */,
+			);
+			name = HealthVCardTests;
+			productName = HealthVCardTests;
+			productReference = 49EF7BD71414CEDC00FE0E5E /* HealthVCardTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		49EF7BAA1414CEDC00FE0E5E /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 49EF7BAD1414CEDC00FE0E5E /* Build configuration list for PBXProject "HealthVCard" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 49EF7BA81414CEDC00FE0E5E;
+			productRefGroup = 49EF7BB41414CEDC00FE0E5E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				49EF7BB21414CEDC00FE0E5E /* HealthVCard */,
+				49EF7BD61414CEDC00FE0E5E /* HealthVCardTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		49EF7BB11414CEDC00FE0E5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49EF7BC21414CEDC00FE0E5E /* InfoPlist.strings in Resources */,
+				49EF7BCB1414CEDC00FE0E5E /* MainWindow.xib in Resources */,
+				49EF7BD11414CEDC00FE0E5E /* RootViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49EF7BD41414CEDC00FE0E5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49EF7BE21414CEDD00FE0E5E /* InfoPlist.strings in Resources */,
+				49EF7BE51414CEDD00FE0E5E /* HealthVCardTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		49EF7BD51414CEDC00FE0E5E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49EF7BAF1414CEDC00FE0E5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49EF7BC51414CEDC00FE0E5E /* main.m in Sources */,
+				49EF7BC81414CEDC00FE0E5E /* HealthVCardAppDelegate.m in Sources */,
+				49EF7BCE1414CEDC00FE0E5E /* RootViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49EF7BD21414CEDC00FE0E5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49EF7BE71414CEDD00FE0E5E /* HealthVCardTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		49EF7BDC1414CEDD00FE0E5E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 49EF7BB21414CEDC00FE0E5E /* HealthVCard */;
+			targetProxy = 49EF7BDB1414CEDD00FE0E5E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		49EF7BC01414CEDC00FE0E5E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49EF7BC11414CEDC00FE0E5E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		49EF7BC91414CEDC00FE0E5E /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49EF7BCA1414CEDC00FE0E5E /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		49EF7BCF1414CEDC00FE0E5E /* RootViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49EF7BD01414CEDC00FE0E5E /* en */,
+			);
+			name = RootViewController.xib;
+			sourceTree = "<group>";
+		};
+		49EF7BE01414CEDD00FE0E5E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49EF7BE11414CEDD00FE0E5E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		49EF7BE81414CEDD00FE0E5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		49EF7BE91414CEDD00FE0E5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		49EF7BEB1414CEDD00FE0E5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HealthVCard/HealthVCard-Prefix.pch";
+				INFOPLIST_FILE = "HealthVCard/HealthVCard-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		49EF7BEC1414CEDD00FE0E5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HealthVCard/HealthVCard-Prefix.pch";
+				INFOPLIST_FILE = "HealthVCard/HealthVCard-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		49EF7BEE1414CEDD00FE0E5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HealthVCard.app/HealthVCard";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HealthVCardTests/HealthVCardTests-Prefix.pch";
+				INFOPLIST_FILE = "HealthVCardTests/HealthVCardTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		49EF7BEF1414CEDD00FE0E5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HealthVCard.app/HealthVCard";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HealthVCardTests/HealthVCardTests-Prefix.pch";
+				INFOPLIST_FILE = "HealthVCardTests/HealthVCardTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		49EF7BAD1414CEDC00FE0E5E /* Build configuration list for PBXProject "HealthVCard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49EF7BE81414CEDD00FE0E5E /* Debug */,
+				49EF7BE91414CEDD00FE0E5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49EF7BEA1414CEDD00FE0E5E /* Build configuration list for PBXNativeTarget "HealthVCard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49EF7BEB1414CEDD00FE0E5E /* Debug */,
+				49EF7BEC1414CEDD00FE0E5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		49EF7BED1414CEDD00FE0E5E /* Build configuration list for PBXNativeTarget "HealthVCardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49EF7BEE1414CEDD00FE0E5E /* Debug */,
+				49EF7BEF1414CEDD00FE0E5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 49EF7BAA1414CEDC00FE0E5E /* Project object */;
+}
