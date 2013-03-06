@@ -1,0 +1,27 @@
+//
+//  Appointments.h
+//  HealthVCard
+//
+//  Created by Vivek Rajput on 9/6/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+#import "KLCalendarView.h"
+#import "CheckmarkTile.h"
+#import "Global.h"
+@interface Appointments : UIViewController <KLCalendarViewDelegate>{
+    KLCalendarView *calendarView;
+	KLTile *currentTile;
+	UITableView *myTableView;
+	NSMutableArray *tableViewData;
+	KLTile *tile;
+	BOOL shouldPushAnotherView;
+	NSString *reminder;
+	IBOutlet UILabel *reminder1;
+    HealthVCardAppDelegate *objappdel;
+    
+}
+
+@end

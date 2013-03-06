@@ -1,0 +1,175 @@
+THealthVCardTests
+v7
+r0
+t347432997.682980
+cCheck dependencies
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk
+c000000004CC7DC9E0000000000000110
+t1288166558
+s272
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Developer/Library/Frameworks/SenTestingKit.framework/Headers/SenTestingKit.h
+c000000004CC11AC600000000000008A5
+t1287723718
+s2213
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/AVFoundation.framework/AVFoundation
+c000000004CC11C42000000000020BF30
+t1287724098
+s2146096
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004CC10EF500000000003532B0
+t1287720693
+s3486384
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004CC10F4700000000003E1F20
+t1287720775
+s4071200
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004CC11AE60000000000000AA1
+t1287723750
+s2721
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004CC11B750000000000C769F0
+t1287723893
+s13068784
+
+N/Volumes/Untitled 3/HealthVCard/HealthVCardTests/HealthVCardTests-Prefix.pch
+c000000004ECB344300000000000000A3
+t1321940035
+s163
+i<UIKit/UIKit.h>
+
+N/Volumes/Untitled 3/HealthVCard/HealthVCardTests/HealthVCardTests.h
+c000000004ECB34430000000000000104
+t1321940035
+s260
+i<SenTestingKit/SenTestingKit.h>
+
+N/Volumes/Untitled 3/HealthVCard/HealthVCardTests/HealthVCardTests.m
+c000000004ECB344300000000000001CF
+t1321940035
+s463
+i"HealthVCardTests.h"
+
+N/Volumes/Untitled 3/HealthVCard/HealthVCardTests/en.lproj/InfoPlist.strings
+c000000004ECB3443000000000000002D
+t1321940035
+s45
+
+N/Volumes/Untitled 3/HealthVCard/build/Debug-iphoneos/HealthVCardTests.octest
+t2
+s0
+
+N/Volumes/Untitled 3/HealthVCard/build/Debug-iphoneos/HealthVCardTests.octest.dSYM
+t2
+s0
+
+N/Volumes/Untitled 3/HealthVCard/build/Debug-iphoneos/HealthVCardTests.octest/HealthVCardTests
+t2
+s0
+
+N/Volumes/Untitled 3/HealthVCard/build/Debug-iphoneos/HealthVCardTests.octest/HealthVCardTests.h
+t2
+s0
+
+N/Volumes/Untitled 3/HealthVCard/build/Debug-iphoneos/HealthVCardTests.octest/Info.plist
+t2
+s0
+
+N/Volumes/Untitled 3/HealthVCard/build/Debug-iphoneos/HealthVCardTests.octest/en.lproj/InfoPlist.strings
+t2
+s0
+
+N/Volumes/Untitled 3/HealthVCard/build/HealthVCard.build/Debug-iphoneos/HealthVCardTests.build/Objects-normal/armv6/HealthVCardTests
+t2
+s0
+
+N/Volumes/Untitled 3/HealthVCard/build/HealthVCard.build/Debug-iphoneos/HealthVCardTests.build/Objects-normal/armv6/HealthVCardTests.LinkFileList
+c00000000000000000000000000000000
+t2
+s0
+
+N/Volumes/Untitled 3/HealthVCard/build/HealthVCard.build/Debug-iphoneos/HealthVCardTests.build/Objects-normal/armv6/HealthVCardTests.o
+t2
+s0
+
+N/Volumes/Untitled 3/HealthVCard/build/HealthVCard.build/Debug-iphoneos/HealthVCardTests.build/Objects-normal/armv7/HealthVCardTests
+t2
+s0
+
+N/Volumes/Untitled 3/HealthVCard/build/HealthVCard.build/Debug-iphoneos/HealthVCardTests.build/Objects-normal/armv7/HealthVCardTests.LinkFileList
+c00000000000000000000000000000000
+t2
+s0
+
+N/Volumes/Untitled 3/HealthVCard/build/HealthVCard.build/Debug-iphoneos/HealthVCardTests.build/Objects-normal/armv7/HealthVCardTests.o
+t2
+s0
+
+N/Volumes/Untitled 3/HealthVCard/build/HealthVCard.build/Debug-iphoneos/HealthVCardTests.build/Script-49EF7BD51414CEDC00FE0E5E.sh
+c00000000000000000000000000000000
+t2
+s0
+
+N/var/folders/wY/wY5iIgFFGnyg4298DZSHr++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HealthVCardTests-Prefix-bintozwxsviezbfiijtgainqmhnh/HealthVCardTests-Prefix.pch.gch
+t2
+s0
+
+N/var/folders/wY/wY5iIgFFGnyg4298DZSHr++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HealthVCardTests-Prefix-farelrygcbaiufaynlftrwncjcgt/HealthVCardTests-Prefix.pch.gch
+t2
+s0
+
+NHealthVCardTests/HealthVCardTests-Info.plist
+c000000004ECB344300000000000002B1
+t1321940035
+s689
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies347432997#347432997#0(288"[WARN]iOS deployment target '4.3' for architecture 'armv6' and variant 'normal' is greater than the maximum value '4.2.99' for the iOS 4.2 SDK.[WARN]iOS deployment target '4.3' for architecture 'armv7' and variant 'normal' is greater than the maximum value '4.2.99' for the iOS 4.2 SDK.2(22@137"iOS deployment target '4.3' for architecture 'armv6' and variant 'normal' is greater than the maximum value '4.2.99' for the iOS 4.2 SDK.347432997#18446744073709551615#0#0(1@0"0(22@137"iOS deployment target '4.3' for architecture 'armv7' and variant 'normal' is greater than the maximum value '4.2.99' for the iOS 4.2 SDK.347432997#18446744073709551615#0#0(1@0"0(0#1#0"8622978784#0"0#
+
+CCompileC build/HealthVCard.build/Debug-iphoneos/HealthVCardTests.build/Objects-normal/armv6/HealthVCardTests.o "/Volumes/Untitled 3/HealthVCard/HealthVCardTests/HealthVCardTests.m" normal armv6 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCompileC build/HealthVCard.build/Debug-iphoneos/HealthVCardTests.build/Objects-normal/armv7/HealthVCardTests.o "/Volumes/Untitled 3/HealthVCard/HealthVCardTests/HealthVCardTests.m" normal armv7 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CCopyStringsFile "/Volumes/Untitled 3/HealthVCard/build/Debug-iphoneos/HealthVCardTests.octest/en.lproj/InfoPlist.strings" HealthVCardTests/en.lproj/InfoPlist.strings
+r0
+
+CCpResource build/Debug-iphoneos/HealthVCardTests.octest/HealthVCardTests.h HealthVCardTests/HealthVCardTests.h
+r0
+
+CCreateUniversalBinary "/Volumes/Untitled 3/HealthVCard/build/Debug-iphoneos/HealthVCardTests.octest/HealthVCardTests" normal "armv6 armv7"
+r0
+
+CGenerateDSYMFile "/Volumes/Untitled 3/HealthVCard/build/Debug-iphoneos/HealthVCardTests.octest.dSYM" "/Volumes/Untitled 3/HealthVCard/build/Debug-iphoneos/HealthVCardTests.octest/HealthVCardTests"
+r0
+
+CLd "/Volumes/Untitled 3/HealthVCard/build/HealthVCard.build/Debug-iphoneos/HealthVCardTests.build/Objects-normal/armv6/HealthVCardTests" normal armv6
+r0
+
+CLd "/Volumes/Untitled 3/HealthVCard/build/HealthVCard.build/Debug-iphoneos/HealthVCardTests.build/Objects-normal/armv7/HealthVCardTests" normal armv7
+r0
+
+CPhaseScriptExecution "Run Script" "/Volumes/Untitled 3/HealthVCard/build/HealthVCard.build/Debug-iphoneos/HealthVCardTests.build/Script-49EF7BD51414CEDC00FE0E5E.sh"
+r0
+
+CProcessInfoPlistFile "/Volumes/Untitled 3/HealthVCard/build/Debug-iphoneos/HealthVCardTests.octest/Info.plist" HealthVCardTests/HealthVCardTests-Info.plist
+r0
+
+CProcessPCH /var/folders/wY/wY5iIgFFGnyg4298DZSHr++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HealthVCardTests-Prefix-bintozwxsviezbfiijtgainqmhnh/HealthVCardTests-Prefix.pch.gch HealthVCardTests/HealthVCardTests-Prefix.pch normal armv7 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CProcessPCH /var/folders/wY/wY5iIgFFGnyg4298DZSHr++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HealthVCardTests-Prefix-farelrygcbaiufaynlftrwncjcgt/HealthVCardTests-Prefix.pch.gch HealthVCardTests/HealthVCardTests-Prefix.pch normal armv6 objective-c com.apple.compilers.llvmgcc42
+r0
+
+CTouch "/Volumes/Untitled 3/HealthVCard/build/Debug-iphoneos/HealthVCardTests.octest"
+r0
+

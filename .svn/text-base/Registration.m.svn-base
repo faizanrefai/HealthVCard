@@ -1,0 +1,241 @@
+//
+//  Registration.m
+//  HealthVCard
+//
+//  Created by apple1 on 11/9/11.
+//  Copyright 2011 openxcek. All rights reserved.
+//
+
+#import "Registration.h"
+#import "JSONParser.h"
+#import "AlertHandler.h"
+static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
+static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
+static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
+@implementation Registration
+
+// The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+/*
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization.
+    }
+    return self;
+}
+*/
+
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	scroll.contentSize = CGSizeMake(320, 540);
+	self.title=@"Registration Form";
+	
+}
+-(void)JSON{
+	//start = [NSDate timeIntervalSinceReferenceDate];
+	[AlertHandler showAlertForProcess];
+	NSString *url=[NSString stringWithFormat:@"http://openxcellaus.info/healthVcard/registration.php?LoginID=%@&Password=%@&FirstName=%@&LastName=%@&Email=%@",txtUserName.text,txtPwd.text,txtFirstNm.text,txtLastNm.text,txtEmail.text];
+	NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+	JSONParser *parser = [[JSONParser alloc] initWithRequestForThread:request sel:@selector(searchResult:) andHandler:self];
+	
+	
+	
+}
+-(IBAction)back:(id)sender{
+
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+
+
+-(void)searchResult:(NSDictionary*)dictionary{
+    
+    
+	[AlertHandler hideAlert];
+
+	NSLog(@"%@",dictionary);
+	if([[dictionary valueForKey:@"msg"] isEqualToString:@"LoginID Already available"]){
+		flag=1;
+		UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Can't Register with This LoginID"
+													  message:@"Please choose another LoginID" 
+													 delegate:self 
+											cancelButtonTitle:nil 
+											otherButtonTitles:@"OK",nil];
+		[alert show];
+		[alert release];
+		
+		
+		
+	}
+	else if([[dictionary valueForKey:@"msg"] isEqualToString:@"Email Already available"]){
+		
+		flag=1;
+		UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Can't Register with This EmailId"
+													  message:@"Please enter another EmailId" 
+													 delegate:self 
+											cancelButtonTitle:nil 
+											otherButtonTitles:@"OK",nil];
+		[alert show];
+		[alert release];
+		
+		
+		
+		
+		
+		
+	}
+	else{
+		flag=0;
+	UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Done"
+												  message:@"Registered Successfully" 
+												 delegate:self 
+										cancelButtonTitle:nil 
+										otherButtonTitles:@"OK",nil];
+	[alert show];
+	[alert release];
+	
+	
+	}
+}
+
+
+/*
+// Override to allow orientations other than the default portrait orientation.
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations.
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+*/
+-(IBAction)Register:(id)sender{
+	email=txtEmail.text;
+
+	emailstatus=[self validateEmailWithString:email];
+	
+	if([txtUserName.text isEqualToString:@""] || [txtPwd.text isEqualToString:@""] 
+	   || [txtFirstNm.text isEqualToString:@""] || [txtLastNm.text isEqualToString:@""]
+	   || [txtEmail.text isEqualToString:@""])
+	{
+		flag=1;
+		UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Resgistration failed"
+													  message:@"Please Enter all the Feilds" 
+													 delegate:self 
+											cancelButtonTitle:nil 
+											otherButtonTitles:@"OK",nil];
+		[alert show];
+		[alert release];
+	
+		
+	}
+	else
+	{
+		if(!emailstatus){
+			
+			{
+				flag=1;
+				UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Resgistration failed"
+															  message:@"Please Enter a Valid EmailID" 
+															 delegate:self 
+													cancelButtonTitle:nil 
+													otherButtonTitles:@"OK",nil];
+				[alert show];
+				[alert release];
+				
+				
+			}
+			
+			
+			
+		}
+		else{
+		
+		flag=0;
+		[self JSON];
+		}
+	}			
+}
+- (BOOL)validateEmailWithString:(NSString*)email11
+{
+	NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+	NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+	return [emailTest evaluateWithObject:email11];
+	
+}
+-(IBAction)click{
+	
+	
+}
+- (void)textFieldDidBeginEditing:(UITextField*)textField
+{
+    CGRect textFieldRect =[self.view.window convertRect:textField.bounds fromView:textField];
+    CGRect viewRect =[self.view.window convertRect:self.view.bounds fromView:self.view];
+    CGFloat midline = textFieldRect.origin.y + 1.0 * textFieldRect.size.height;
+    CGFloat numerator =midline - viewRect.origin.y- MINIMUM_SCROLL_FRACTION * viewRect.size.height;
+    CGFloat denominator =(MAXIMUM_SCROLL_FRACTION - MINIMUM_SCROLL_FRACTION)* viewRect.size.height;
+    CGFloat heightFraction = numerator / denominator;
+    animatedDistance = floor(162.0 * heightFraction);
+    CGRect viewFrame = self.view.frame;
+    viewFrame.origin.y -= animatedDistance;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+    [self.view setFrame:viewFrame];
+    [UIView commitAnimations];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    CGRect viewFrame = self.view.frame;
+    viewFrame.origin.y += animatedDistance;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+    [self.view setFrame:viewFrame];
+    [UIView commitAnimations];
+}
+#pragma mark UITextView delegate methods
+
+
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	// the user clicked one of the OK/Cancel buttons
+	if (buttonIndex == 0)
+	{
+		if(flag==1)
+		{
+			
+			
+		}
+		else		//PropertiesDetailVC *obj=[[PropertiesDetailVC alloc]initWithNibName@"PropertiesDetailVC" bundle:nil];
+		[self.navigationController popViewControllerAnimated:YES];
+		
+	}
+	
+}
+
+- (void)didReceiveMemoryWarning {
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc. that aren't in use.
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+
+- (void)dealloc {
+    [super dealloc];
+	[txtEmail release];
+	[txtFirstNm release];
+	[txtLastNm release];
+	[txtPwd release];
+	
+}
+
+
+@end

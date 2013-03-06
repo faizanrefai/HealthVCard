@@ -1,0 +1,340 @@
+//
+//  Account_Information.m
+//  HealthVCard
+//
+//  Created by Vivek Rajput on 9/5/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
+#import "Account_Information.h"
+#import "JSONParser.h"
+#import "AlertHandler.h"
+static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
+static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
+static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
+@implementation Account_Information
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+	appdel=(HealthVCardAppDelegate *)[[UIApplication sharedApplication]delegate];
+	self.title=[NSString stringWithFormat:@"%@",appdel.appActName];
+	
+    scrl.scrollEnabled = TRUE;
+	self.navigationItem.hidesBackButton=TRUE;
+	scrl.contentSize = CGSizeMake(320, 780);
+	
+}
+-(void)viewWillAppear:(BOOL)animated{
+	
+	[self JSON];
+	
+	
+}
+-(void)JSON{
+	[AlertHandler showAlertForProcess];
+	
+		
+	
+	NSString *url=[NSString stringWithFormat:@"http://openxcellaus.info/healthVcard/account_Detalis_Accountid.php?account_id=%@",appdel.strAccount_id];
+	NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+	JSONParser *parser = [[JSONParser alloc] initWithRequestForThread:request sel:@selector(searchResult:) andHandler:self];
+	
+	
+	
+}
+-(void)searchResult:(NSDictionary*)dictionary{
+    
+    [AlertHandler hideAlert];
+	NSLog(@"%@",dictionary);
+	arrlist=[[NSMutableArray alloc]init];
+
+	arrlist = (NSMutableArray*)[dictionary valueForKey:@"result"];
+
+	txtName.text=[[arrlist objectAtIndex:0]valueForKey:@"name"];
+	txtProvince.text=[[arrlist objectAtIndex:0]valueForKey:@"province"];
+	
+	txtAdd.text=[[arrlist objectAtIndex:0]valueForKey:@"address"];
+	txtCity.text=[[arrlist objectAtIndex:0]valueForKey:@"city"];	
+	txtPostalCode.text=[[arrlist objectAtIndex:0]valueForKey:@"postal_code"];
+	txtDob.text=[[arrlist objectAtIndex:0]valueForKey:@"DOB"];
+	txtSin.text=[[arrlist objectAtIndex:0]valueForKey:@"SIN"];	
+	txtHelthcardno.text=[[arrlist objectAtIndex:0]valueForKey:@"health_card"];
+	txtAdiinfo.text=[[arrlist objectAtIndex:0]valueForKey:@"additional_info"];	
+	
+	
+	
+}
+-(void)JSONDelete{
+	[AlertHandler showAlertForProcess];
+	
+	
+	
+	NSString *url=[NSString stringWithFormat:@"http://openxcellaus.info/healthVcard/delete_account.php?userid=%@&account_id=%@",appdel.appUserId,appdel.actID];
+	NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+	JSONParser *parser = [[JSONParser alloc] initWithRequestForThread:request sel:@selector(searchResult1:) andHandler:self];
+	
+	
+	
+}
+-(void)searchResult1:(NSDictionary*)dictionary{
+    [AlertHandler hideAlert];
+	NSLog(@"%@",dictionary);
+	if([[dictionary valueForKey:@"msg"]isEqualToString:@"Account Deleted Successfully"])
+		{
+			
+			UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Account Delete" message:@"Account has been deleted successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+			[alert show];
+			[alert release];
+			
+		}
+		else {
+			
+			
+			UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:@"No such account exists" delegate:self cancelButtonTitle:nil  otherButtonTitles:@"OK",nil];
+			[alert show];
+			[alert release];
+		}
+
+	
+	
+}
+-(void)JSONSave{
+	[AlertHandler showAlertForProcess];
+	
+	NSString *txtName1=(NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)txtName.text, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
+	NSString *txtCity1=(NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)txtCity.text, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
+	NSString *txtProvince1=(NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)txtProvince.text, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
+	NSString *txtPostalCode1=(NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)txtPostalCode.text, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
+	NSString *txtDob1=(NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)txtDob.text, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
+	NSString *txtSin1=(NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)txtSin.text, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
+	NSString *txtHelthcardno1=(NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)txtHelthcardno.text, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
+	NSString *txtAdiinfo1= (NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)txtAdiinfo.text, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
+	NSString *txtAdd1= (NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)txtAdd.text, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
+	
+	
+	
+	
+	NSString *url=[NSString stringWithFormat:@"http://openxcellaus.info/healthVcard/update_account.php?account_id=%@&name=%@&address=%@&city=%@&province=%@&postal_code=%@&DOB=%@&SIN=%@&health_card=%@&additional_info=%@",
+				   appdel.actID,txtName1,txtAdd1,txtCity1,txtProvince1,txtPostalCode1,txtDob1,txtSin1,txtHelthcardno1,txtAdiinfo1];
+	NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+	JSONParser *parser = [[JSONParser alloc] initWithRequestForThread:request sel:@selector(searchResultSave:) andHandler:self];
+	
+	
+	
+}
+-(void)searchResultSave:(NSDictionary*)dictionary{
+    [AlertHandler hideAlert];
+	NSLog(@"%@",dictionary);
+	if([[dictionary valueForKey:@"msg"]isEqualToString:@"Account Updated Successfully"])
+	{
+		
+		UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Account Updated" message:@"Account has been updated successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+		[alert show];
+		[alert release];
+		
+	}
+	else {
+		
+		
+		UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:@"Account can not be updated" delegate:self cancelButtonTitle:nil  otherButtonTitles:@"OK",nil];
+		[alert show];
+		[alert release];
+	}
+	
+	
+	
+}
+#pragma mark UIAlertView
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	
+	if (buttonIndex == 0)
+	{
+		if(flag==0)
+		{
+			flag=1;
+		}
+		else{	
+		[self.navigationController popViewControllerAnimated:YES];
+		}
+	}
+	if (buttonIndex==1) {
+		[self JSONDelete];
+	}
+}
+#pragma mark textField
+- (void)textFieldDidBeginEditing:(UITextField*)textField
+{
+    CGRect textFieldRect =[self.view.window convertRect:textField.bounds fromView:textField];
+    CGRect viewRect =[self.view.window convertRect:self.view.bounds fromView:self.view];
+    CGFloat midline = textFieldRect.origin.y + 1.0 * textFieldRect.size.height;
+    CGFloat numerator =midline - viewRect.origin.y- MINIMUM_SCROLL_FRACTION * viewRect.size.height;
+    CGFloat denominator =(MAXIMUM_SCROLL_FRACTION - MINIMUM_SCROLL_FRACTION)* viewRect.size.height;
+    CGFloat heightFraction = numerator / denominator;
+    animatedDistance = floor(162.0 * heightFraction);
+    CGRect viewFrame = self.view.frame;
+    viewFrame.origin.y -= animatedDistance;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+    [self.view setFrame:viewFrame];
+    [UIView commitAnimations];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    CGRect viewFrame = self.view.frame;
+    viewFrame.origin.y += animatedDistance;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+    [self.view setFrame:viewFrame];
+    [UIView commitAnimations];
+}
+#pragma mark textView
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range 
+ replacementText:(NSString *)text
+{
+	if([txtAdiinfo.text isEqualToString:@"Write Here......"]){
+		txtAdiinfo.text=@"";
+	}
+	
+	// Any new character added is passed in as the "text" parameter
+	if ([text isEqualToString:@"\n"]) {
+		// Be sure to test for equality using the "isEqualToString" message
+		[txtAdiinfo resignFirstResponder];
+		
+		// Return FALSE so that the final '\n' character doesn't get added
+		return FALSE;
+	}
+	// For any other character return TRUE so that the text gets added to the view
+	return TRUE;
+}
+
+
+-(void) textViewDidBeginEditing:(UITextView *)textView{
+	
+	CGRect textFieldRect =[self.view.window convertRect:textView.bounds fromView:textView];
+	CGRect viewRect =[self.view.window convertRect:self.view.bounds fromView:self.view];
+	
+	CGFloat midline = textFieldRect.origin.y + 1.0 * textFieldRect.size.height;
+	CGFloat numerator =midline - viewRect.origin.y- MINIMUM_SCROLL_FRACTION * viewRect.size.height;
+	CGFloat denominator =(MAXIMUM_SCROLL_FRACTION - MINIMUM_SCROLL_FRACTION)* viewRect.size.height;
+	CGFloat heightFraction = numerator / denominator;
+	
+	animatedDistance = floor(162.0 * heightFraction);
+	
+	CGRect viewFrame = self.view.frame;
+	
+	viewFrame.origin.y -= animatedDistance;
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	[UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+	
+	[self.view setFrame:viewFrame];
+    [UIView commitAnimations];   
+}
+-(void) textViewDidEndEditing:(UITextView *)textView{
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	[UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+	self.view.frame = CGRectMake(0,0, 320, 460);
+	
+	
+	[txtAdiinfo resignFirstResponder];
+	
+	[UIView commitAnimations];   
+	
+	
+}
+
+- (void)dealloc
+{
+    [super dealloc];
+	[txtName release];
+	[txtAdd release];
+	[txtAdiinfo release];
+	[txtCity release];
+	[txtDob release];
+	[txtHelthcardno release];
+	[txtPostalCode release];
+	[txtProvince release];
+	[txtSin release];
+	[scrl release];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
+
+#pragma mark IBAction
+-(IBAction)Delete
+{
+	
+
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"You are about to delete all information associated with %@",appdel.appActName] message:@"This is final and not reversible.Please confirm you want to proceed with the deletion." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+    [alert show];
+    [alert release];
+    
+}
+-(IBAction)save{
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"yyyy-mm-dd"];
+	NSDate *date = [dateFormatter dateFromString:txtDob.text];
+	if([txtName.text isEqualToString:@""]){
+		
+		UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Please Enter Name" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+		[alert show];
+		[alert release];
+		flag=0;
+	}
+	else if (!date) { 
+		
+		UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Wrong Date" message:@"Please Enter Date in yyyy-mm-dd Format" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+		[alert show];
+		[alert release];
+		flag=0;
+	}
+	else
+		[self JSONSave];
+	
+}
+-(IBAction)click{
+    
+}
+-(IBAction)Cancel{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+@end

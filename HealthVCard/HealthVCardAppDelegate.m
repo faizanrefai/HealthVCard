@@ -11,17 +11,48 @@
 @implementation HealthVCardAppDelegate
 
 
-@synthesize window=_window;
-
-@synthesize navigationController=_navigationController;
+@synthesize window=_window,strInfotype,arrDate,sign,arrSort,strUrl;
+@synthesize appUserId,flag,appUserName,actID,appActName,appNid,appStrTitle,appStrNote;
+@synthesize navigationController=_navigationController,count;
+@synthesize strcategory,strselect,strdate,appStrSubTitle,arrCountry,arrCountryId,strAccount_id;
+@synthesize toolbar=toolbar;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     // Add the navigation controller's view to the window and display.
     self.window.rootViewController = self.navigationController;
-    [self.window makeKeyAndVisible];
+	arrSort=[[NSMutableArray alloc]init];
+	strUrl=@"http://health.selectpath.ca/webservices/";
+      [self.window makeKeyAndVisible];
+	
+	
     return YES;
+}
+-(void)JSON{
+	//[AlertHandler showAlertForProcess];
+	//start = [NSDate timeIntervalSinceReferenceDate];
+	//NSString *url=[NSString stringWithFormat:@"http://openxcellaus.info/healthVcard/registration.php?LoginID=%@&Password=%@&FirstName=%@&LastName=%@&Email=%@",txtUserName.text,txtPwd.text,txtFirstNm.text,txtLastNm.text,txtEmail.text];
+	NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://openxcellaus.info/healthVcard/CountriList.php"]];
+	JSONParser *parser = [[JSONParser alloc] initWithRequestForThread:request sel:@selector(searchResult:) andHandler:self];
+	
+	
+	
+}
+-(void)searchResult:(NSDictionary*)dictionary{
+    
+    
+	//[AlertHandler hideAlert];
+	
+	arrCountry=[[NSMutableArray alloc]init];
+	arrCountryId=[[NSMutableArray alloc]init];
+	
+	arrCountry=[[[dictionary valueForKey:@"CountryList"]valueForKey:@"CountryName"] retain] ;
+	arrCountryId=[[[dictionary valueForKey:@"CountryList"]valueForKey:@"CountryId"] retain] ;
+	//[picker reloadAllComponents];
+	
+	
+	
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -67,6 +98,7 @@
 {
     [_window release];
     [_navigationController release];
+	
     [super dealloc];
 }
 

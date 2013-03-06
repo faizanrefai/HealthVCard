@@ -1,0 +1,143 @@
+//
+//  TableCell.m
+//  JobSearch
+//
+//  Created by apple on 7/12/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
+#import "TableCell.h"
+#import "AlertHandler.h"
+#import "JSONParser.h"
+
+@implementation TableCell
+
+@synthesize txttitle,txtnote;
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    appdel=(HealthVCardAppDelegate *)[[UIApplication sharedApplication]delegate];
+		
+    // Do any additional setup after loading the view from its nib.
+}
+#pragma mark IBAction
+-(IBAction)Delete1{
+	
+	UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Are You Sure" message:@"You are about to Delete the notes associated with Medical Information " delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm Note Delete", nil];
+    [alert show];
+    [alert release];
+		
+}
+-(IBAction)Update{
+	[self JSONSave];
+	
+	
+	
+}
+-(IBAction)Click{
+	
+	
+	
+}
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	
+	if (buttonIndex == 0)
+	{
+		
+		
+	}
+	if (buttonIndex == 1)
+	{
+		[self JSONDel];
+		
+	}
+	
+}
+-(void)JSONSave{
+	[AlertHandler showAlertForProcess];
+	
+	
+	NSString *strnote=(NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)txtnote.text, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
+	NSString *strtitle=(NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)txttitle.text, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
+
+	NSString *url=[NSString stringWithFormat:@"http://openxcellaus.info/healthVcard/update_medical_note.php?nid=%@&title=%@&note=%@",appdel.appNid,strtitle,strnote];
+	NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+	JSONParser *parser = [[JSONParser alloc] initWithRequestForThread:request sel:@selector(searchResult:) andHandler:self];
+	
+	
+	
+}
+-(void)searchResult:(NSDictionary*)dictionary{
+    [AlertHandler hideAlert];
+	NSLog(@"%@",dictionary);
+	//if([[dictionary valueForKey:@"msg"]isEqualToString:@"note Deleted Successfully"])
+//	{
+//		
+//		UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Note Delete" message:@"Note has been deleted successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+//		[alert show];
+//		[alert release];
+//		
+//	}
+//	else {
+//		
+//		
+//		UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:@"No such note exists" delegate:self cancelButtonTitle:nil  otherButtonTitles:@"OK",nil];
+//		[alert show];
+//		[alert release];
+//	}
+//	
+	
+	
+}
+
+-(void)JSONDel{
+	[AlertHandler showAlertForProcess];
+	
+	
+	
+	NSString *url=[NSString stringWithFormat:@"http://openxcellaus.info/healthVcard/delete_medical_note.php?nid=%@",appdel.appNid];
+	NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+	JSONParser *parser = [[JSONParser alloc] initWithRequestForThread:request sel:@selector(searchResult1:) andHandler:self];
+	
+	
+	
+}
+-(void)searchResult1:(NSDictionary*)dictionary{
+    [AlertHandler hideAlert];
+	NSLog(@"%@",dictionary);
+	if([[dictionary valueForKey:@"msg"]isEqualToString:@"note Deleted Successfully"])
+	{
+		
+		UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Note Delete" message:@"Note has been deleted successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+		[alert show];
+		[alert release];
+		
+	}
+	else {
+		
+		
+		UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:@"No such note exists" delegate:self cancelButtonTitle:nil  otherButtonTitles:@"OK",nil];
+		[alert show];
+		[alert release];
+	}
+	
+	
+	
+}
+#pragma mark textfield
+
+- (void)textFieldDidBeginEditing:(UITextField*)textField
+{
+    }
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+	//NSLog(@"text box %@",appdel.appStrNote);
+//	appdel.appStrNote=txtnote.text;
+//	appdel.appStrTitle=txttitle.text;
+	// [textField resignFirstResponder];
+}
+
+
+
+@end

@@ -1,0 +1,275 @@
+//
+//  Login.m
+//  HealthVCard
+//
+//  Created by Vivek Rajput on 9/5/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
+#import "Login.h"
+#import "Registration.h"
+#import "JSONParser.h"
+#import "AlertHandler.h"
+static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
+static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
+static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
+
+@implementation Login
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+- (void)textFieldDidBeginEditing:(UITextField*)textField
+{
+    CGRect textFieldRect =[self.view.window convertRect:textField.bounds fromView:textField];
+    CGRect viewRect =[self.view.window convertRect:self.view.bounds fromView:self.view];
+    CGFloat midline = textFieldRect.origin.y + 1.0 * textFieldRect.size.height;
+    CGFloat numerator =midline - viewRect.origin.y- MINIMUM_SCROLL_FRACTION * viewRect.size.height;
+    CGFloat denominator =(MAXIMUM_SCROLL_FRACTION - MINIMUM_SCROLL_FRACTION)* viewRect.size.height;
+    CGFloat heightFraction = numerator / denominator;
+    animatedDistance = floor(162.0 * heightFraction);
+    CGRect viewFrame = self.view.frame;
+    viewFrame.origin.y -= animatedDistance;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+    [self.view setFrame:viewFrame];
+    [UIView commitAnimations];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    CGRect viewFrame = self.view.frame;
+    viewFrame.origin.y += animatedDistance;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+    [self.view setFrame:viewFrame];
+    [UIView commitAnimations];
+}
+- (void)dealloc
+{
+    [super dealloc];
+	[txtName release];
+	[txtEmail release];
+	[txtPassword release];
+	[btnLogin release];
+	[btnEmail release];
+}
+-(IBAction)click{
+
+
+}
+-(IBAction)Registration:(id)sender{
+	
+	Registration *registration=[[Registration alloc]initWithNibName:@"Registration" bundle:nil];
+    [self.navigationController pushViewController:registration animated:YES];
+    [registration release];
+	
+	
+	
+}
+-(IBAction)Login:(id)sender{
+			 		
+				
+		
+	
+	if([txtName.text isEqualToString:@""] || [txtPassword.text isEqualToString:@""]){
+		
+		
+		UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Login Failed" message:@"Please insert value" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+		[alert show];
+		[alert release];
+		
+		
+	}
+	else {
+		[self JSON];
+		objappdel.appUserName=txtName.text;
+	}
+
+	
+	
+		
+
+}
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	
+	if (buttonIndex == 0)
+	{
+		if(count==2){
+				btnLogin.enabled=FALSE;
+			timer=[NSTimer scheduledTimerWithTimeInterval:60 target: self selector: @selector(CallMe) userInfo: nil repeats: NO];
+
+		}	
+		
+		txtName.text=@"";
+		txtPassword.text=@"";
+		txtEmail.text=@"";
+	}
+	else {
+		
+	}
+
+	
+}
+-(void)JSON{
+	[AlertHandler showAlertForProcess];
+	//start = [NSDate timeIntervalSinceReferenceDate];
+	NSString *url=[NSString stringWithFormat:@"http://openxcellaus.info/healthVcard/login.php?LoginID=%@&Password=%@",txtName.text,txtPassword.text];
+	NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+	JSONParser *parser = [[JSONParser alloc] initWithRequestForThread:request sel:@selector(searchResult:) andHandler:self];
+	
+		
+}
+-(void)searchResult:(NSDictionary*)dictionary{
+    
+	[AlertHandler hideAlert];
+	objappdel.appUserId=[dictionary valueForKey:@"user_id"];
+	NSLog(@"user id is%@",objappdel.appUserId);
+	if([[dictionary valueForKey:@"msg"] isEqualToString:@"Login Fail"])
+	{
+		count++;
+		if(count==2){
+			UIAlertView *alert1=[[UIAlertView alloc]initWithTitle:@"You have exceeded the allowable number of attempts." message:@" Please enter your email address below and we will email you your login information" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+			[alert1 show];
+			[alert1 release];
+			
+		}	
+		UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Login Failed" message:@"The Login-ID and password do not match our records, please try again" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+		[alert show];
+		[alert release];
+		
+	}
+	else{
+		
+		MainMenu *objMainMenu=[[MainMenu alloc]initWithNibName:@"MainMenu" bundle:nil];
+		[self.navigationController pushViewController:objMainMenu animated:YES];
+		[objMainMenu release];
+		
+		
+	}   
+	
+	
+	
+}-(void)MailDet{
+	[AlertHandler showAlertForProcess];
+	//start = [NSDate timeIntervalSinceReferenceDate];
+	NSString *url=[NSString stringWithFormat:@"http://openxcellaus.info/healthVcard/forgot_password.php?Email=%@",txtEmail.text];
+	NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+	JSONParser *parser = [[JSONParser alloc] initWithRequestForThread:request sel:@selector(maildetail:) andHandler:self];
+	
+	
+}
+-(void)maildetail:(NSDictionary*)dictionary{
+    
+	[AlertHandler hideAlert];
+	
+	if([[dictionary valueForKey:@"msg"] isEqualToString:@"Please enter Valid email address"])
+	{
+		
+		UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"That email address does not appear to be in our records." message:@" Please email info@selectpath.com so that we can assist further." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+		[alert show];
+		[alert release];
+		
+	}
+	else{
+		
+		UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Mail Send" message:@"Login ID and Password has been send" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+		[alert show];
+		[alert release];
+		
+		
+		
+	}
+}
+		
+#pragma mark timeInterval
+
+
+-(IBAction)Email:(id)sender{
+	
+	if([txtEmail.text isEqualToString:@""])
+	{
+		
+		UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please Enter an emailId." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+		[alert show];
+		[alert release];
+		
+	}
+	else{
+	[self MailDet];
+	}
+	
+}
+-(void)CallMe{
+	count=0;
+	btnLogin.enabled=TRUE;
+	
+}
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
+
+#pragma mark - View lifecycle
+-(void)viewWillAppear:(BOOL)animated{
+	txtName.text=@"";
+	txtPassword.text=@"";
+	objappdel.appActName=nil;
+	objappdel.strAccount_id=nil;
+	if(objappdel.flag==2)
+	{
+		
+		txtName.text=@"";
+		txtPassword.text=@"";
+		
+		
+	}
+    objappdel=(HealthVCardAppDelegate *)[[UIApplication sharedApplication]delegate];
+	objappdel.toolbar.hidden=TRUE;
+	//objappdel.toolbar.frame=CGRectMake(0, 0, 320, 50);
+	
+	
+
+    
+}
+-(void)viewWillDisappear:(BOOL)animated{
+	[timer invalidate];
+    timer = nil;
+	
+	
+}
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    objappdel=(HealthVCardAppDelegate *)[[UIApplication sharedApplication]delegate];
+	count=0;
+    
+
+     
+    // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+@end

@@ -1,0 +1,55 @@
+THealthVCardTests
+v7
+r1
+
+N/Volumes/Untitled 3/SVN/HealthVCard/HealthVCardTests/HealthVCardTests.h
+c000000004ECB34430000000000000104
+t1321940035
+s260
+
+N/Volumes/Untitled 3/SVN/HealthVCard/HealthVCardTests/en.lproj/InfoPlist.strings
+c000000004ECB3443000000000000002D
+t1321940035
+s45
+
+N/Volumes/Untitled 3/SVN/HealthVCard/build/Debug/HealthVCardTests.octest
+t2
+s0
+
+N/Volumes/Untitled 3/SVN/HealthVCard/build/Debug/HealthVCardTests.octest/Contents/Info.plist
+t2
+s0
+
+N/Volumes/Untitled 3/SVN/HealthVCard/build/Debug/HealthVCardTests.octest/Contents/Resources/HealthVCardTests.h
+t2
+s0
+
+N/Volumes/Untitled 3/SVN/HealthVCard/build/Debug/HealthVCardTests.octest/Contents/Resources/en.lproj/InfoPlist.strings
+t2
+s0
+
+N/Volumes/Untitled 3/SVN/HealthVCard/build/HealthVCard.build/Debug/HealthVCardTests.build/Script-49EF7BD51414CEDC00FE0E5E.sh
+c00000000000000000000000000000000
+t2
+s0
+
+NHealthVCardTests/HealthVCardTests-Info.plist
+c000000004ECB344300000000000002B1
+t1321940035
+s689
+
+CCopyStringsFile "/Volumes/Untitled 3/SVN/HealthVCard/build/Debug/HealthVCardTests.octest/Contents/Resources/en.lproj/InfoPlist.strings" HealthVCardTests/en.lproj/InfoPlist.strings
+r0
+
+CCpResource build/Debug/HealthVCardTests.octest/Contents/Resources/HealthVCardTests.h HealthVCardTests/HealthVCardTests.h
+r0
+
+CPhaseScriptExecution "Run Script" "/Volumes/Untitled 3/SVN/HealthVCard/build/HealthVCard.build/Debug/HealthVCardTests.build/Script-49EF7BD51414CEDC00FE0E5E.sh"
+r0
+
+CProcessInfoPlistFile "/Volumes/Untitled 3/SVN/HealthVCard/build/Debug/HealthVCardTests.octest/Contents/Info.plist" HealthVCardTests/HealthVCardTests-Info.plist
+r0
+
+CTouch "/Volumes/Untitled 3/SVN/HealthVCard/build/Debug/HealthVCardTests.octest"
+r0
+

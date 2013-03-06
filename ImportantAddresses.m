@@ -1,0 +1,191 @@
+//
+//  ImportantAddresses.m
+//  HealthVCard
+//
+//  Created by Vivek Rajput on 9/6/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
+#import "ImportantAddresses.h"
+#import "AlertHandler.h"
+#import "JSONParser.h"
+
+@implementation ImportantAddresses
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+-(void)viewWillAppear:(BOOL)animated{
+	objappdel=(HealthVCardAppDelegate *)[[UIApplication sharedApplication]delegate];
+	arrAid=[[NSMutableArray alloc]init];
+	arrName=[[NSMutableArray alloc]init];
+		
+	objappdel.sign=@"no";
+	self.title=[NSString stringWithFormat:@"%@",objappdel.appActName];
+	self.navigationItem.hidesBackButton=TRUE;
+	[self JSONDisplayNote];
+	
+}
+- (void)dealloc
+{
+    [super dealloc];
+	[tblcontact release];
+	if(arrAid!=nil){
+		
+		arrAid=nil;
+		[arrAid release];
+		
+	}
+	if(arrName!=nil){
+		
+		arrName=nil;
+		[arrName release];
+		
+	}
+	
+}
+-(IBAction)newcontact{
+    Address_Detail *obj=[[Address_Detail alloc]initWithNibName:@"Address_Detail" bundle:nil];
+    objappdel.strselect=@"New";
+    
+    objappdel.flag=66;
+    
+    [self.navigationController pushViewController:obj animated:YES];
+    [obj release];
+    
+    
+}
+-(void)JSONDisplayNote{
+	[AlertHandler showAlertForProcess];
+	
+	NSString *url;
+	
+	url=[NSString stringWithFormat:@"%@import_address_list.php?account_id=%@&userid=%@",objappdel.strUrl,objappdel.strAccount_id,objappdel.appUserId];
+		
+	NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+	JSONParser *parser;
+	parser= [[JSONParser alloc] initWithRequestForThread:request sel:@selector(searchResult1:) andHandler:self];
+	
+	
+}
+-(void)searchResult1:(NSDictionary*)dictionary{
+    [AlertHandler hideAlert];
+	NSLog(@"%@",dictionary);
+	[arrName removeAllObjects];
+	[arrAid removeAllObjects];
+	
+	NSLog(@"%d",[arrName count]);	
+		
+		if([[dictionary valueForKey:@"msg"] isEqualToString:@"Data not Found"])
+		{
+			[tblcontact reloadData];
+			
+		}
+		else{
+			
+			
+			
+			arrName=[[[dictionary valueForKey:@"Important_Address"]valueForKey:@"Title"]copy];
+			arrAid=[[[dictionary valueForKey:@"Important_Address"]valueForKey:@"aid"]copy];
+			[tblcontact reloadData];
+		}
+	
+}
+
+
+#pragma mark tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [arrName count];
+}
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    if([arrName count]!=0)
+	cell.textLabel.text=[arrName objectAtIndex:indexPath.row];    
+    
+    // Configure the cell.
+    return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    Address_Detail *obj=[[Address_Detail alloc]initWithNibName:@"Address_Detail" bundle:nil];
+    objappdel.strselect=@"Detail";
+    objappdel.flag=13;
+    objappdel.actID=[arrAid objectAtIndex:indexPath.row];
+    objappdel.appStrSubTitle=[arrName objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:obj animated:YES];
+    [obj release];
+    
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    
+    UIImageView *imgView;
+    
+    UILabel *lblSection;
+    lblSection = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,320 , 20)];
+    lblSection.text = @"Important Addresses";
+    lblSection.textColor = [UIColor whiteColor];
+    [lblSection setBackgroundColor:[UIColor clearColor]];
+    
+    
+    imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NewAccntHeader.png"]];
+    [imgView addSubview:lblSection];
+    
+    return imgView;
+}
+
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+  
+    
+    // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+@end

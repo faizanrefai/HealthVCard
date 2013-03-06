@@ -1,0 +1,248 @@
+//
+//  Appointments.m
+//  HealthVCard
+//
+//  Created by Vivek Rajput on 9/6/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
+#import "Appointments.h"
+#import "AppointmentDetail.h"
+
+@implementation Appointments
+@synthesize tkmonthView;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [super dealloc];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
+- (void) calendarMonthView:(TKCalendarMonthView*)monthView didSelectDate:(NSDate*)date
+{
+	
+	NSLog(@"Date Selected is %@",date);
+		//txtbdate.text=date;
+	    
+	NSDateFormatter *timeFormat = [[[NSDateFormatter alloc] init] autorelease];
+	[timeFormat setDateFormat:@"yyyy-MM-dd"];
+	[timeFormat setLocale:[NSLocale currentLocale]];
+	[timeFormat setTimeZone:[NSTimeZone localTimeZone]]; 
+	NSString *theTime = [timeFormat stringFromDate:date];	
+	NSLog(@"%@",theTime); 
+	objappdel.strdate=theTime;
+	    
+	[tkmonthView reload];
+	AppointmentDetail *appointmentDetail=[[AppointmentDetail alloc]initWithNibName:@"AppointmentDetail" bundle:nil];
+	[self.navigationController pushViewController:appointmentDetail animated:YES];
+	[appointmentDetail release];
+}
+- (NSArray*)calendarMonthView:(TKCalendarMonthView *)monthView marksFromDate:(NSDate *)startDate toDate:(NSDate *)lastDate
+{	
+	NSMutableArray * data = [[NSMutableArray alloc] init];
+	NSDateFormatter *dateForm = [[NSDateFormatter alloc] init];
+	NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
+	[dateForm setDateFormat:@"yyyy-MM-dd"];
+	[dateForm setTimeZone:gmt];
+	NSDate *date ;
+	
+	
+    for (int i=0; i<[objappdel.arrDate count]; i++)
+	{
+		NSString *time;
+		time=[objappdel.arrDate objectAtIndex:i];
+		//time=  [[[jobData valueForKey:@"Record"] objectAtIndex:i] valueForKey:@"JobStartDate"];
+		//time = [[time componentsSeparatedByString:@" "] objectAtIndex:0];
+		date = [dateForm dateFromString:time];
+		[data addObject:[NSString stringWithFormat:@"%@",date]];
+    }
+	//NSArray *copy = [data copy];
+	//	NSInteger index = [copy count] - 1;
+	//	for (id object in [copy reverseObjectEnumerator]) 
+	//	{
+	//		if ([data indexOfObject:object inRange:NSMakeRange(0, index)] != NSNotFound) 
+	//		{
+	//			[data removeObjectAtIndex:index];
+	//		}
+	//		index--;
+	//	}
+	//	
+	// Initialise empty marks array, this will be populated with TRUE/FALSE in order for each day a marker should be placed on.
+	NSMutableArray *marks = [NSMutableArray array];
+	
+	// Initialise calendar to current type and set the timezone to never have daylight saving
+	NSCalendar *cal = [NSCalendar currentCalendar];
+	[cal setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+	
+	// Construct DateComponents based on startDate so the iterating date can be created.
+	// Its massively important to do this assigning via the NSCalendar and NSDateComponents because of daylight saving has been removed 
+	// with the timezone that was set above. If you just used "startDate" directly (ie, NSDate *date = startDate;) as the first 
+	// iterating date then times would go up and down based on daylight savings.
+	NSDateComponents *comp = [cal components:(NSYearCalendarUnit | NSMonthCalendarUnit |
+											  NSDayCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit) 
+									fromDate:startDate];
+	NSDate *d = [cal dateFromComponents:comp];
+	
+	// Init offset components to increment days in the loop by one each time
+	NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+	[offsetComponents setDay:1];	
+	
+	
+	// for each date between start date and end date check if they exist in the data array
+	while (YES) {
+		// Is the date beyond the last date? If so, exit the loop.
+		// NSOrderedDescending = the left value is greater than the right
+		if ([d compare:lastDate] == NSOrderedDescending) 
+		{
+			break;
+		}
+		
+		// If the date is in the data array, add it to the marks array, else don't
+		//NSLog(@"%@",[d description]);
+		
+		if ([data containsObject:[d description]]) {
+			[marks addObject:[NSNumber numberWithBool:YES]];
+		} else {
+			[marks addObject:[NSNumber numberWithBool:NO]];
+		}
+		
+		// Increment day using offset components (ie, 1 day in this instance)
+		d = [cal dateByAddingComponents:offsetComponents toDate:d options:0];
+	}
+	
+	[offsetComponents release];
+	
+	return [NSArray arrayWithArray:marks];
+}
+
+
+
+-(void)JSON{
+	[AlertHandler showAlertForProcess];
+	//start = [NSDate timeIntervalSinceReferenceDate];
+	NSString *url=[NSString stringWithFormat:@"http://openxcellaus.info/healthVcard/appointment_list.php?userid=%@&account_id=%@",objappdel.appUserId,objappdel.strAccount_id];
+	NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+	JSONParser *parser;
+	parser= [[JSONParser alloc] initWithRequestForThread:request sel:@selector(searchResult:) andHandler:self];
+	
+	
+}
+-(void)searchResult:(NSDictionary*)dictionary{
+	[AlertHandler hideAlert];
+	objappdel.arrDate=[[NSMutableArray alloc]init];
+	objappdel.arrDate=[[[dictionary valueForKey:@"Appointments"]valueForKey:@"Date"]copy];
+	NSLog(@"%@",objappdel.arrDate);
+	[tkmonthView reload];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+   //    self.title=@"John Smith";
+     self.navigationItem.hidesBackButton=TRUE;
+	
+    
+    // Do any additional setup after loading the view from its nib.
+}
+-(void)viewWillAppear:(BOOL)animated{
+	tkmonthView=[[TKCalendarMonthView alloc]init];
+	tkmonthView.delegate = self;
+	tkmonthView.dataSource = self;
+	
+	[self.view addSubview:tkmonthView];
+    
+	
+    objappdel=(HealthVCardAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    self.title=[NSString stringWithFormat:@"%@",objappdel.appActName];
+	
+	[self JSON];
+	
+	objappdel.sign=@"change";
+	
+}
+//- (void)calendarView:(KLCalendarView *)calendarView tappedTile:(KLTile *)aTile{
+//	NSLog(@"Date Selected is %@",[aTile date]);
+//	//txtbdate.text=[aTile date];
+//    //	
+//	[aTile flash];
+//	
+//	 
+//	NSString *str1=[NSString stringWithFormat:@"%@",[aTile date]];
+//	objappdel.strdate=str1;
+//    
+//    AppointmentDetail *obj=[[AppointmentDetail alloc]initWithNibName:@"AppointmentDetail" bundle:nil];
+//    [self.navigationController pushViewController:obj animated:YES];
+//    [obj release];
+//    
+//	
+//	
+//    
+//    
+//	
+//}
+
+
+//- (void)didChangeMonths{
+//	
+//    UIView *clip = calendarView.superview;
+//    if (!clip)
+//        return;
+//    
+//    CGRect f = clip.frame;
+//    NSInteger weeks = [calendarView selectedMonthNumberOfWeeks];
+//    CGFloat adjustment = 0.f;
+//    
+//    switch (weeks) {
+//        case 4:
+//            adjustment = (92/321)*360+30;
+//            break;
+//        case 5:
+//            adjustment = (46/321)*360;
+//            break;
+//        case 6:
+//            adjustment = 0.f;
+//            break;
+//        default:
+//            break;
+//    }
+//    f.size.height = 360 - adjustment;
+//    clip.frame = f;
+//	
+//	CGRect f2 = CGRectMake(0,260-adjustment,320,160+adjustment);
+//	myTableView.frame = f2;
+//	[self.view bringSubviewToFront:myTableView];
+//	tile = nil;
+//}
+
+
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+@end

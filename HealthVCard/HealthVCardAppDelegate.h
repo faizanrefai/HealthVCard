@@ -7,13 +7,65 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSON.h"
+#import	"AlertHandler.h"
+#import	"JSONParser.h"
 
 @interface HealthVCardAppDelegate : NSObject <UIApplicationDelegate> {
-
+    NSString *strcategory;
+    NSString *strselect;
+    NSString *strdate;
+	NSString *appUserId;
+    IBOutlet UIToolbar *toolbar;
+	int flag;
+	NSString *appUserName;
+	NSString *actID;
+	NSString *appActName;
+	NSString *appNid;
+	NSString *appStrNote;
+	NSString *appStrTitle;
+	NSString *strAccount_id;
+	NSString *appStrSubTitle;
+	NSMutableArray *arrCountry;
+	NSMutableArray *arrCountryId;
+	NSString *count;
+	NSString *strInfotype;
+	NSMutableArray *arrDate;
+	NSString *sign;
+	NSMutableArray *arrSort;
+	NSString *strUrl;
+    
 }
+@property(nonatomic,retain)NSString *strUrl;
+@property(nonatomic,retain)NSMutableArray *arrSort;
+@property(nonatomic,retain)NSMutableArray *arrDate;
+@property(nonatomic,retain)NSString *strInfotype;
+@property(nonatomic,retain)NSString *sign;
+@property(nonatomic,retain)NSMutableArray *arrCountry;
+@property(nonatomic,retain)NSMutableArray *arrCountryId;
+@property(nonatomic,retain)NSString *strcategory;
+@property(nonatomic,retain)NSString *strAccount_id;
+@property(nonatomic,retain)NSString *appStrSubTitle;
+@property(nonatomic,retain)NSString *appStrNote;
+@property(nonatomic,retain)NSString *appStrTitle;
+@property(nonatomic,retain)NSString *appNid;
+@property(nonatomic,retain)NSString *appActName;
+@property(nonatomic,retain)NSString *count;
+
+@property(nonatomic,retain)NSString *actID;
+
+@property(nonatomic,retain)NSString *appUserName;
+@property(nonatomic,retain)NSString *appUserId;
+@property(nonatomic)int flag;
+
+@property(nonatomic,retain)NSString *strdate;
+
+@property(nonatomic,retain)NSString *strselect;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+-(void)JSON;
 
 @end
